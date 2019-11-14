@@ -287,21 +287,29 @@ check_and_encode_files <- function(dat, column = "Body", encode = TRUE, n_check 
     message("check_and_encode_files - 1")
     # stop if content at file.path does not exist
     files_exist <- sapply(head(dat[,column], n_check), file.exists)
+        message("check_and_encode_files - 2")
     if(any(!files_exist)){
+          message("check_and_encode_files - 3")
       not_found_idx <- which(!files_exist)
+          message("check_and_encode_files - 4")
       for(i in head(not_found_idx, 5)){
+            message("check_and_encode_files - 5")
         message(sprintf("Row %s, File Not Found: %s", not_found_idx, dat[not_found_idx, column]))
       }
+      
       if(sum(!files_exist) > 5){
         message(sprintf("There were %s files not found (run `sapply(dat[,'%s'], file.exists`) to see them all)", 
                         sum(!files_exist), column))
       }
+          message("check_and_encode_files - 6")
       if(nrow(dat) > n_check){
         message(sprintf("Only checked the first %s rows of the '%s' column are valid file paths.", 
                         n_check, column))
       }
+          message("check_and_encode_files - 7")
       stop(sprintf("Cannot process until all values in '%s' column are valid file paths.", column))
     }
+        message("check_and_encode_files - pre encode")
     if(encode){
       # base64 encode the values in the target column
       dat[,column] <- sapply(dat[,column], base64encode)  
