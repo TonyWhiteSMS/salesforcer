@@ -191,12 +191,14 @@ sf_create_attachment_rest <- function(input_data,
                                       control, ..., 
                                       verbose = FALSE){
   
+  print(paste("verbose: ",verbose)
   input_data <- sf_input_data_validation(operation = sprintf("create_%s", 
                                                              tolower(object_name)), 
                                          input_data)
   # check if files exist at paths specified since REST doesnt need them encoded
   input_data <- check_and_encode_files(input_data, encode=FALSE)
-  
+  print(paste("input data validated and ready"))
+        
   control <- do.call("sf_control", control)
   if("AllOrNoneHeader" %in% names(control)){
     message("The AllOrNoneHeader is ignored when creating attachments since the procedure iterates one at a time.")
