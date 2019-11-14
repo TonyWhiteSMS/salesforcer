@@ -286,6 +286,9 @@ check_and_encode_files <- function(dat, column = "Body", encode = TRUE, n_check 
   } else {
     message("check_and_encode_files - 1")
     # stop if content at file.path does not exist
+    message(paste("n_check:",n_check))
+        message(paste("column:",column))
+        message(paste("head(dat[,column], n_check):",head(dat[,column], n_check)))
     files_exist <- sapply(head(dat[,column], n_check), file.exists)
         message("check_and_encode_files - 2")
     if(any(!files_exist)){
