@@ -191,7 +191,7 @@ sf_create_attachment_rest <- function(input_data,
                                       control, ..., 
                                       verbose = FALSE){
   
-  message(paste("verbose: ",verbose)
+  message(paste("verbose: ",verbose))
   input_data <- sf_input_data_validation(operation = sprintf("create_%s", 
                                                              tolower(object_name)), 
                                          input_data)
