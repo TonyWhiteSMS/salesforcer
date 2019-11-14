@@ -191,10 +191,11 @@ sf_create_attachment_rest <- function(input_data,
                                       control, ..., 
                                       verbose = FALSE){
   
-  message(paste("verbose: ",verbose))
+  message("creating attachments via REST")
   input_data <- sf_input_data_validation(operation = sprintf("create_%s", 
                                                              tolower(object_name)), 
                                          input_data)
+    message("sf_input_data_validation completed")
   # check if files exist at paths specified since REST doesnt need them encoded
   input_data <- check_and_encode_files(input_data, encode=FALSE)
   message(paste("input data validated and ready"))
@@ -283,6 +284,7 @@ check_and_encode_files <- function(dat, column = "Body", encode = TRUE, n_check 
     # assume that the column was not specified and left as "Body" default but the 
     # data itself contains another column holding the body data, typically a Url
   } else {
+    message("check_and_encode_files - 1")
     # stop if content at file.path does not exist
     files_exist <- sapply(head(dat[,column], n_check), file.exists)
     if(any(!files_exist)){
@@ -305,5 +307,6 @@ check_and_encode_files <- function(dat, column = "Body", encode = TRUE, n_check 
       dat[,column] <- sapply(dat[,column], base64encode)  
     }
   }
+  essage("check_and_encode_files - done")
   return(dat)
 }
